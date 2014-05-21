@@ -1,7 +1,7 @@
 #set working directory
 setwd("C:/Users/user/Desktop/R")
 
-###1.Merges the training and the test sets to create one data set.
+###1.Merges the training and the test sets to create one data set
 #load activity_labels.txt
 activity_labels <- read.table("./data/UCI HAR Dataset/activity_labels.txt",sep="",header=FALSE)
 names(activity_labels) <- c("activity_id","activity")
@@ -54,7 +54,7 @@ df.train <- cbind(group="train",subject_id=subject_train$subject_id,
 df <- rbind(df.test,df.train)
 
 
-###2.Extracts only the measurements on the mean and standard deviation for each measurement. 
+###2.Extracts only the measurements on the mean and standard deviation for each measurement
 df.s <- df[,c(grep("-mean\\(\\)|-std\\(\\)",c(names(df)),perl=TRUE,value=TRUE))]
 df.s <- cbind(df[,1:3],df.s)
 
@@ -65,7 +65,7 @@ df.s <- merge(df.s,activity_labels,by.x="activity_id",by.y="activity_id",all.x=F
 df.s <- df.s[,c(2,3,1,70,4:69)]
 
 
-###4.Appropriately labels the data set with descriptive activity names.
+###4.Appropriately labels the data set with descriptive activity names
 names(df.s) <- gsub("^t","time_",names(df.s),ignore.case=FALSE,perl=FALSE,fixed=FALSE,useBytes=FALSE)
 names(df.s) <- gsub("^f","frequency_",names(df.s),ignore.case=FALSE,perl=FALSE,fixed=FALSE,useBytes=FALSE)
 names(df.s) <- gsub("-","_",names(df.s),ignore.case=FALSE,perl=FALSE,fixed=FALSE,useBytes=FALSE)
@@ -74,7 +74,11 @@ names(df.s) <- gsub("std\\(\\)","std",names(df.s),ignore.case=FALSE,perl=FALSE,f
 names(df.s) <- gsub("Mag","_Mag",names(df.s),ignore.case=FALSE,perl=FALSE,fixed=FALSE,useBytes=FALSE)
 
 
-###5.Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+#write to file (first tidy output)
+write.table(df.s,"tidy.txt",sep="\t",row.names=FALSE)
+
+
+###5.Creates a second, independent tidy data set with the average of each variable for each activity and each subject
 #load training signal files
 filenames <- list.files("./data/UCI HAR Dataset/train/Inertial Signals/",pattern="*txt")
 names <- gsub(".txt","",filenames,ignore.case=FALSE,perl=FALSE,fixed=FALSE,useBytes=FALSE)
@@ -148,7 +152,7 @@ names(molten.a) <- c("subject_id","activity_id","activity","mean")
 molten.a
 
 
-#write to file
-write.table(molten.a,"tidy.txt",sep="\t",row.names=FALSE)
+#write to file (second tidy output - means)
+write.table(molten.a,"tidy_means.txt",sep="\t",row.names=FALSE)
 
 

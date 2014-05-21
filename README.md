@@ -34,6 +34,8 @@ specific tasks include
 
 ### Step 4: Appropriately labels the data set with descriptive activity names
 
+1.  writes to file (first tidy output)
+
 
 ### Step 5: Creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
@@ -47,7 +49,7 @@ specific tasks include
 6.  melts signal data
 7.  aggregates by subject id and activity id
 8.  gets activity labels and produce final output
-9.  writes to file
+9.  writes to file (second tidy output - means)
 
 
 

@@ -1,6 +1,6 @@
 ### Introduction
 
-This script loads and cleans the data set Human Activity Recognition Using Smartphones, and it produces a text file of summary statistics from formatted tidy data set as the output.
+This script loads and cleans the data set Human Activity Recognition Using Smartphones, and it produces a text file of means by each measure and each activity for each subject from the processed tidy data set as the output.
 
 
 ### Step 1: Merges the training and the test sets to create one data set
